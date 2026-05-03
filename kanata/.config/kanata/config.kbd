@@ -1,0 +1,68 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; The first layer defined is the layer that will be active by default when
+;; kanata starts up. This layer is the standard QWERTY layout except for the
+;; backtick/grave key (@grl) which is an alias for a tap-hold key.
+(deflayer qwerty
+  @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt        @spcsb            ralt rmet rctl
+)
+
+(deflayer colemak-dh
+  @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    f    p    b    j    l    u    y    ;    [    ]    \
+  caps a    r    s    t    g    m    n    e    i    o    '    ret
+  lsft z    x    c    d    v    k    h    ,    .    /    rsft
+  lctl lmet lalt        @spcsb            ralt rmet rctl
+)
+
+
+
+(defalias
+  ;; tap: backtick (grave), hold: toggle layer-switching layer while held
+  grl (tap-hold 200 200 grv (layer-toggle layers))
+  spcsb (tap-hold 200 200 spc (layer-toggle symbols))
+
+  ;; layer-switch changes the base layer.
+  clmdh (layer-switch colemak-dh)
+  qwr (layer-switch qwerty)
+
+  ;; tap for capslk, hold for lctl
+  cap (tap-hold 200 200 caps lctl)
+
+)
+
+
+(deflayer layers
+  _    @qwr @clmdh lrld _    _    _    _    _    _    _    _    _    _
+  _    _    _      _    _    _    _    _    _    _    _    _    _    _
+  _    _    _      _    _    _    _    _    _    _    _    _    _
+  _    _    _      _    _    _    _    _    _    _    _    _
+  _    _    _                _              _    _    _
+)
+
+(deflayer symbols
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    `    S-,  -    S-.  S-\  S-4  S-[  S-]  '    S-6  _    _    _
+  _    S-1  S-8  /    =    S-7  bspc S-9  S-0  S-'  S--  _    _
+  _    S-`  S-=  [    ]    S-5  S-2  S-3  ,    .    \    _
+  _    _    _              _              _    _    _
+)
+
+ 
+;;(deflayer qwerty
+;; @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;; tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+;; caps a    s    d    f    g    h    j    k    l    ;    '    ret
+;; lsft z    x    c    v    b    n    m    ,    .    /    rsft
+;; lctl lmet lalt        @spcsb            ralt rmet rctl
+;;)
